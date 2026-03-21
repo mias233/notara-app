@@ -1,5 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
-import { BloomEffect, ChromaticAberrationEffect, EffectComposer, EffectPass, RenderPass } from 'https://unpkg.com/postprocessing@6.34.3/build/postprocessing.esm.js';
+import { BloomEffect, ChromaticAberrationEffect, EffectComposer, EffectPass, RenderPass } from 'https://unpkg.com/postprocessing@6.34.3/build/index.js';
 import * as faceapi from 'https://unpkg.com/@vladmandic/face-api@1.7.12/dist/face-api.esm.js';
 
 const vert = `
