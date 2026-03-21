@@ -8,6 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+    </script>
     <style>
 /* CSS VARIABLES & BASE */
 :root {
@@ -684,7 +691,9 @@ const provider = new GoogleAuthProvider();
 
 window.__fb = { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup, provider };
 window.dispatchEvent(new Event('firebase-ready'));
+    </script>
 
+    <script type="module">
 import { GridScan } from './bg_logic.js';
 const container = document.getElementById('canvas-container');
 const bgScan = new GridScan(container, {
@@ -699,7 +708,6 @@ const bgScan = new GridScan(container, {
     chromaticAberration: 0.002,
     noiseIntensity: 0.01
 });
-
     </script>
     
     <script>
