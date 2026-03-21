@@ -109,6 +109,52 @@ body {
     100% { transform: translate(30px, -50px) scale(1.1); }
 }
 
+/* GridScan Background */
+.gridscan {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gridscan__preview {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 220px;
+  height: 132px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  background: #000;
+  color: #fff;
+  font:
+    12px/1.2 system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+  pointer-events: none;
+}
+
+.gridscan__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.gridscan__badge {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
 /* General Typography */
 h1, h2, h3, h4 { font-family: var(--font-display); font-weight: normal; }
 .logo { font-family: var(--font-display); font-size: 32px; letter-spacing: -0.5px; }
@@ -268,12 +314,7 @@ header {
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+    <div id="canvas-container" style="position: fixed; inset: 0; z-index: -2;"></div>
 
 <style>
 #splash {
@@ -643,6 +684,21 @@ const provider = new GoogleAuthProvider();
 
 window.__fb = { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile, signInWithPopup, provider };
 window.dispatchEvent(new Event('firebase-ready'));
+
+import { GridScan } from './bg_logic.js';
+const container = document.getElementById('canvas-container');
+const bgScan = new GridScan(container, {
+    sensitivity: 0.55,
+    lineThickness: 1,
+    linesColor: "#392e4e",
+    gridScale: 0.1,
+    scanColor: "#FF9FFC",
+    scanOpacity: 0.4,
+    enablePost: true,
+    bloomIntensity: 0.6,
+    chromaticAberration: 0.002,
+    noiseIntensity: 0.01
+});
 
     </script>
     
