@@ -17,13 +17,13 @@ let currentTags = [];
 function parseNotes() {
     if(!currentUser) return [];
     try {
-        const data = localStorage.getItem(`notara_\${currentUser.uid}`);
+        const data = localStorage.getItem(`notara_${currentUser.uid}`);
         return data ? JSON.parse(data) : [];
     } catch(e) { return []; }
 }
 function saveMemNotes() {
     if(!currentUser) return;
-    localStorage.setItem(`notara_\${currentUser.uid}`, JSON.stringify(window.notesList));
+    localStorage.setItem(`notara_${currentUser.uid}`, JSON.stringify(window.notesList));
 }
 
 function loadNotes() {
@@ -63,20 +63,20 @@ function renderNotesList(query = '') {
             notesListEl.appendChild(h);
             groups[g].forEach(n => {
                 const item = document.createElement('div');
-                item.className = `note-item \${currentNoteId === n.id ? 'active' : ''}`;
+                item.className = `note-item ${currentNoteId === n.id ? 'active' : ''}`;
                 item.onclick = () => openNote(n.id);
                 
                 const titleStr = n.title || 'Untitled Note';
                 const previewStr = n.content.substring(0, 100) || 'No additional text';
                 const dateStr = new Date(n.updatedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                const tagsHtml = n.tags.slice(0,3).map(t => `<div class="tag-mini">\${escapeHTML(t)}</div>`).join('');
+                const tagsHtml = n.tags.slice(0,3).map(t => `<div class="tag-mini">${escapeHTML(t)}</div>`).join('');
                 
                 item.innerHTML = `
-                    <div class="note-title">\${escapeHTML(titleStr)}</div>
-                    <div class="note-preview">\${escapeHTML(previewStr)}</div>
+                    <div class="note-title">${escapeHTML(titleStr)}</div>
+                    <div class="note-preview">${escapeHTML(previewStr)}</div>
                     <div class="note-meta">
-                        <span>\${dateStr}</span>
-                        <div class="note-tags-mini">\${tagsHtml}</div>
+                        <span>${dateStr}</span>
+                        <div class="note-tags-mini">${tagsHtml}</div>
                     </div>
                 `;
                 notesListEl.appendChild(item);
@@ -128,7 +128,7 @@ function renderTags() {
     currentTags.forEach(tag => {
         const chip = document.createElement('div');
         chip.className = 'tag-chip';
-        chip.innerHTML = `<span>\${escapeHTML(tag)}</span> <button onclick="removeTag('\${escapeHTML(tag)}')"><i class="ph ph-x"></i></button>`;
+        chip.innerHTML = `<span>${escapeHTML(tag)}</span> <button onclick="removeTag('${escapeHTML(tag)}')"><i class="ph ph-x"></i></button>`;
         tagsWrap.insertBefore(chip, tagInput);
     });
 }
@@ -154,11 +154,11 @@ tagInput.addEventListener('keydown', (e) => {
 function updateWordCount() {
     const text = noteBody.value.trim();
     const count = text ? text.split(/\\s+/).length : 0;
-    wordCount.textContent = `\${count} words`;
+    wordCount.textContent = `${count} words`;
 }
 
 function setSaveState(state) {
-    saveDot.className = `save-dot \${state}`;
+    saveDot.className = `save-dot ${state}`;
     if(state === 'saved') saveText.textContent = 'Saved';
     if(state === 'unsaved') saveText.textContent = 'Unsaved changes';
     if(state === 'saving') saveText.textContent = 'Saving...';

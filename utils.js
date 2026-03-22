@@ -7,11 +7,11 @@ window.saveTimeout = null;
 // UI Helpers
 window.showToast = function(msg, type = 'info') {
     const toast = document.createElement('div');
-    toast.className = `toast \${type}`;
+    toast.className = `toast ${type}`;
     let icon = 'ph-info';
     if(type==='success') icon = 'ph-check-circle';
     if(type==='error') icon = 'ph-warning-circle';
-    toast.innerHTML = `<i class="ph \${icon}"></i> <span>\${msg}</span>`;
+    toast.innerHTML = `<i class="ph ${icon}"></i> <span>${msg}</span>`;
     document.getElementById('toastContainer').appendChild(toast);
     
     requestAnimationFrame(() => toast.classList.add('show'));

@@ -720,11 +720,11 @@ window.saveTimeout = null;
 // UI Helpers
 window.showToast = function(msg, type = 'info') {
     const toast = document.createElement('div');
-    toast.className = `toast \${type}`;
+    toast.className = `toast ${type}`;
     let icon = 'ph-info';
     if(type==='success') icon = 'ph-check-circle';
     if(type==='error') icon = 'ph-warning-circle';
-    toast.innerHTML = `<i class="ph \${icon}"></i> <span>\${msg}</span>`;
+    toast.innerHTML = `<i class="ph ${icon}"></i> <span>${msg}</span>`;
     document.getElementById('toastContainer').appendChild(toast);
     
     requestAnimationFrame(() => toast.classList.add('show'));
@@ -821,7 +821,7 @@ pwdInput.addEventListener('input', (e) => {
     if(/[A-Z]/.test(val)) strength += 20;
     if(/[0-9]/.test(val)) strength += 15;
     if(/[^A-Za-z0-9]/.test(val)) strength += 15;
-    pwdStrengthBar.style.width = `\${strength}%`;
+    pwdStrengthBar.style.width = `${strength}%`;
     pwdStrengthBar.style.background = strength > 70 ? 'var(--success)' : strength > 40 ? 'var(--warning)' : 'var(--error)';
 });
 
@@ -921,13 +921,13 @@ let currentTags = [];
 function parseNotes() {
     if(!currentUser) return [];
     try {
-        const data = localStorage.getItem(`notara_\${currentUser.uid}`);
+        const data = localStorage.getItem(`notara_${currentUser.uid}`);
         return data ? JSON.parse(data) : [];
     } catch(e) { return []; }
 }
 function saveMemNotes() {
     if(!currentUser) return;
-    localStorage.setItem(`notara_\${currentUser.uid}`, JSON.stringify(window.notesList));
+    localStorage.setItem(`notara_${currentUser.uid}`, JSON.stringify(window.notesList));
 }
 
 function loadNotes() {
@@ -967,20 +967,20 @@ function renderNotesList(query = '') {
             notesListEl.appendChild(h);
             groups[g].forEach(n => {
                 const item = document.createElement('div');
-                item.className = `note-item \${currentNoteId === n.id ? 'active' : ''}`;
+                item.className = `note-item ${currentNoteId === n.id ? 'active' : ''}`;
                 item.onclick = () => openNote(n.id);
                 
                 const titleStr = n.title || 'Untitled Note';
                 const previewStr = n.content.substring(0, 100) || 'No additional text';
                 const dateStr = new Date(n.updatedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                const tagsHtml = n.tags.slice(0,3).map(t => `<div class="tag-mini">\${escapeHTML(t)}</div>`).join('');
+                const tagsHtml = n.tags.slice(0,3).map(t => `<div class="tag-mini">${escapeHTML(t)}</div>`).join('');
                 
                 item.innerHTML = `
-                    <div class="note-title">\${escapeHTML(titleStr)}</div>
-                    <div class="note-preview">\${escapeHTML(previewStr)}</div>
+                    <div class="note-title">${escapeHTML(titleStr)}</div>
+                    <div class="note-preview">${escapeHTML(previewStr)}</div>
                     <div class="note-meta">
-                        <span>\${dateStr}</span>
-                        <div class="note-tags-mini">\${tagsHtml}</div>
+                        <span>${dateStr}</span>
+                        <div class="note-tags-mini">${tagsHtml}</div>
                     </div>
                 `;
                 notesListEl.appendChild(item);
@@ -1032,7 +1032,7 @@ function renderTags() {
     currentTags.forEach(tag => {
         const chip = document.createElement('div');
         chip.className = 'tag-chip';
-        chip.innerHTML = `<span>\${escapeHTML(tag)}</span> <button onclick="removeTag('\${escapeHTML(tag)}')"><i class="ph ph-x"></i></button>`;
+        chip.innerHTML = `<span>${escapeHTML(tag)}</span> <button onclick="removeTag('${escapeHTML(tag)}')"><i class="ph ph-x"></i></button>`;
         tagsWrap.insertBefore(chip, tagInput);
     });
 }
@@ -1058,11 +1058,11 @@ tagInput.addEventListener('keydown', (e) => {
 function updateWordCount() {
     const text = noteBody.value.trim();
     const count = text ? text.split(/\\s+/).length : 0;
-    wordCount.textContent = `\${count} words`;
+    wordCount.textContent = `${count} words`;
 }
 
 function setSaveState(state) {
-    saveDot.className = `save-dot \${state}`;
+    saveDot.className = `save-dot ${state}`;
     if(state === 'saved') saveText.textContent = 'Saved';
     if(state === 'unsaved') saveText.textContent = 'Unsaved changes';
     if(state === 'saving') saveText.textContent = 'Saving...';
@@ -1220,7 +1220,7 @@ async function callClaude(instruction) {
                 max_tokens: 1000,
                 messages: [{
                     role: 'user',
-                    content: `Instruction: \${instruction}\\n\\nNote Content:\\n\${content}`
+                    content: `Instruction: ${instruction}\\n\\nNote Content:\\n${content}`
                 }]
             })
         });

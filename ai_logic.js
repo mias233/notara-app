@@ -79,7 +79,7 @@ async function callClaude(instruction) {
                 max_tokens: 1000,
                 messages: [{
                     role: 'user',
-                    content: `Instruction: \${instruction}\\n\\nNote Content:\\n\${content}`
+                    content: `Instruction: ${instruction}\\n\\nNote Content:\\n${content}`
                 }]
             })
         });

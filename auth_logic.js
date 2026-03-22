@@ -62,7 +62,7 @@ pwdInput.addEventListener('input', (e) => {
     if(/[A-Z]/.test(val)) strength += 20;
     if(/[0-9]/.test(val)) strength += 15;
     if(/[^A-Za-z0-9]/.test(val)) strength += 15;
-    pwdStrengthBar.style.width = `\${strength}%`;
+    pwdStrengthBar.style.width = `${strength}%`;
     pwdStrengthBar.style.background = strength > 70 ? 'var(--success)' : strength > 40 ? 'var(--warning)' : 'var(--error)';
 });
 
