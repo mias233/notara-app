@@ -5,12 +5,13 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCUKh8DP3RWlRTXpIZSFrpIlBJ7t7dPThA",
-    authDomain: "notesaverai.firebaseapp.com",
-    projectId: "notesaverai",
-    storageBucket: "notesaverai.firebasestorage.app",
-    messagingSenderId: "1085695840430",
-    appId: "1:1085695840430:web:8430146df69ba452b3dd3f"
+    apiKey: "AIzaSyCKSnq6AMJ-WVsNrWzfE3cl43GkcakO3_Q",
+    authDomain: "ainotesaver.firebaseapp.com",
+    projectId: "ainotesaver",
+    storageBucket: "ainotesaver.firebasestorage.app",
+    messagingSenderId: "522688121145",
+    appId: "1:522688121145:web:0c938e5b15b9ff7129c0e8",
+    measurementId: "G-LZ0WL3CBP8"
 };
 
 const app = initializeApp(firebaseConfig);
